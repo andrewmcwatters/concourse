@@ -7,6 +7,8 @@ resources:
 jobs:
 - name: hello-world-job
   plan:
+  # Add a get step referencing the resource
+  - get: repo
   - task: hello-world-task
     config:
       platform: linux
