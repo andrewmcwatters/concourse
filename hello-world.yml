@@ -1,6 +1,8 @@
 resources:
 - name: repo
   type: git
+  source:
+    uri: https://github.com/andrewmcwatters/concourse.git
 
 jobs:
 - name: hello-world-job
