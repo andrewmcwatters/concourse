@@ -1,4 +1,6 @@
 resources:
+- name: repo
+  type: git
 
 jobs:
 - name: hello-world-job
