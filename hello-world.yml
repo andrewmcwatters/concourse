@@ -1,3 +1,5 @@
+resources:
+
 jobs:
 - name: hello-world-job
   plan:
