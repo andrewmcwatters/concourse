@@ -1,6 +1,14 @@
 # concourse
 hello-world.yml from "1.1.2 Hello World Pipeline" of Concourse CI Docs
 
+## Configure the pipeline
+```sh
+fly -t tutorial set-pipeline \
+    --pipeline hello-world \
+    --config hello-world.yml \
+    --var "private-key=$(cat id_ed25519)"
+```
+
 ## Run the pipeline
 ```sh
 $ fly -t tutorial set-pipeline -p hello-world -c hello-world.yml

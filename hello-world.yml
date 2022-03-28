@@ -2,7 +2,11 @@ resources:
 - name: repo
   type: git
   source:
-    uri: https://github.com/andrewmcwatters/concourse.git
+    # changed uri to ssh format
+    uri: git@github.com:andrewmcwatters/concourse.git
+    # specify branch because it's required for the put step
+    branch: master
+    private_key: ((private-key))
 
 jobs:
 - name: hello-world-job
@@ -16,8 +20,8 @@ jobs:
         type: registry-image
         source:
           repository: busybox
-      inputs: # add the get step as an input to this task
+      inputs:
       - name: repo
-      run: # read the file from the get step
+      run:
         path: cat
         args: ["repo/README.md"]
