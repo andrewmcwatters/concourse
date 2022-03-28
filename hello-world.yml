@@ -1,3 +1,4 @@
 jobs:
 - name: hello-world-job
   plan:
+  - task: hello-world-task
