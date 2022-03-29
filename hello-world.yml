@@ -2,9 +2,7 @@ resources:
 - name: repo
   type: git
   source:
-    # changed uri to ssh format
     uri: git@github.com:andrewmcwatters/concourse.git
-    # specify branch because it's required for the put step
     branch: main
     private_key: ((private-key))
 
@@ -13,15 +11,29 @@ jobs:
   plan:
   - get: repo
     trigger: true
-  - task: hello-world-task
+  - task: create-commit # renamed task
     config:
       platform: linux
       image_resource:
         type: registry-image
         source:
-          repository: busybox
+          repository: gitea/gitea # use any image that has the git cli
       inputs:
       - name: repo
+      outputs: # Add repo as an output
+      - name: repo
+      params: # Change these to match your ssh key info
+        EMAIL: person@example.com
+        GIT_AUTHOR_NAME: Person Doe
       run:
-        path: cat
-        args: ["repo/README.md"]
+        path: sh
+        args:
+        - -cx
+        # this is just a bash script
+        - |
+          cd repo
+          date +%Y-%m-%d > todays-date
+          git add ./todays-date
+          git config --global user.email $EMAIL
+          git config --global user.name $GIT_AUTHOR_NAME
+          git commit -m "Update todays date"
