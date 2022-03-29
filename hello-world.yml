@@ -5,7 +5,7 @@ resources:
     # changed uri to ssh format
     uri: git@github.com:andrewmcwatters/concourse.git
     # specify branch because it's required for the put step
-    branch: master
+    branch: main
     private_key: ((private-key))
 
 jobs:
